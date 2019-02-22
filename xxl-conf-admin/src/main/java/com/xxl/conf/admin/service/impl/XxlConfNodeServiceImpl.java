@@ -394,17 +394,18 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
             public void run() {
                 while (!executorStoped) {
                     try {
-                        // new message, filter readed
+                        // 找到新添加的消息 not in nodeMessage
                         List<XxlConfNodeMsg> messageList = xxlConfNodeMsgDao.findMsg(readedMessageIds);
                         if (messageList != null && messageList.size() > 0) {
+                            logger.info("readMessageId change, is {}", readedMessageIds);
                             for (XxlConfNodeMsg message : messageList) {
                                 readedMessageIds.add(message.getId());
-                                // sync file
+                                // 同步文件，并发送广播通知
                                 setFileConfData(message.getEnv(), message.getKey(), message.getValue());
                             }
                         }
 
-                        // clean old message;
+                        // 定时清理消息堆积，防止效率过低
                         if ((System.currentTimeMillis() / 1000) % confBeatTime == 0) {
                             logger.info("clear old message");
                             xxlConfNodeMsgDao.cleanMessage(confBeatTime);
@@ -552,6 +553,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         logger.info(">>>>>>>>>>> xxl-conf, setFileConfData: confFileName={}, value={}", confFileName, value);
 
         // 通知客户端
+        // 基于DeferredResult来推送
         List<DeferredResult> deferredResultList = confDeferredResultMap.get(confFileName);
         if (deferredResultList != null) {
             confDeferredResultMap.remove(confFileName);
