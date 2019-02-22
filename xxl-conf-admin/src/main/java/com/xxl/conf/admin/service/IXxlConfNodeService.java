@@ -29,9 +29,6 @@ public interface IXxlConfNodeService {
 
 	public ReturnT<String> update(XxlConfNode xxlConfNode, XxlConfUser loginUser, String loginEnv);
 
-    /*ReturnT<String> syncConf(String appname, XxlConfUser loginUser, String loginEnv);*/
-
-
     // ---------------------- rest api ----------------------
 
     public ReturnT<Map<String, String>> find(String accessToken, String env, List<String> keys);

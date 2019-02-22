@@ -129,17 +129,6 @@ public class ConfController {
 		return xxlConfNodeService.update(xxlConfNode, xxlConfUser, loginEnv);
 	}
 
-	/*@RequestMapping("/syncConf")
-	@ResponseBody
-	public ReturnT<String> syncConf(HttpServletRequest request,
-										String appname) {
-
-		XxlConfUser xxlConfUser = (XxlConfUser) request.getAttribute(LoginService.LOGIN_IDENTITY);
-		String loginEnv = (String) request.getAttribute(CURRENT_ENV);
-
-		return xxlConfNodeService.syncConf(appname, xxlConfUser, loginEnv);
-	}*/
-
 
 	// ---------------------- rest api ----------------------
 

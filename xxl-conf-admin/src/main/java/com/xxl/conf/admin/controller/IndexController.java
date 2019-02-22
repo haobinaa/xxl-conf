@@ -31,6 +31,7 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request) {
+        logger.info("index");
         return "redirect:/conf";
     }
 

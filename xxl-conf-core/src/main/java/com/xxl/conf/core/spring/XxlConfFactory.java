@@ -201,25 +201,6 @@ public class XxlConfFactory extends InstantiationAwareBeanPostProcessorAdapter
 					}
 				}
 			});
-
-			/*Field[] beanFields = bean.getClass().getDeclaredFields();
-			if (beanFields!=null && beanFields.length>0) {
-				for (Field fieldItem: beanFields) {
-					if (beanField.getProperty().equals(fieldItem.getName())) {
-						try {
-							Object valueObj = FieldReflectionUtil.parseValue(fieldItem.getType(), value);
-
-							fieldItem.setAccessible(true);
-							fieldItem.set(bean, valueObj);		// support mult data types
-
-							logger.info(">>>>>>>>>>> xxl-conf, refreshBeanField[field] success, {}#{}:{}",
-									beanField.getBeanName(), beanField.getProperty(), value);
-						} catch (IllegalAccessException e) {
-							throw new XxlConfException(e);
-						}
-					}
-				}
-			}*/
 		}
 
 	}
